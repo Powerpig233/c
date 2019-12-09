@@ -68,6 +68,18 @@ not sure++  (C) A sizeof(int*)-sized storage space is allocated on the heap whic
 (C) The return value of main() gives information to the operating system about the success of the program.
 (D) main() gets the command line arguments as parameters.
 
+Programming task
+
+Create a function for resolving "[a-z]" abbreviations in strings, so the string contains "abcde...xyz" instead of "[a-z]".
+For example having "This is my [f-o] string" the output is "This is my fhijklmno string". Note that a string may contain multiple abbreviations, however, these abbreviations cannot be nested. You may assume that [ and ] characters are in the string only for this purpose and that all abbreviations are correct.
+
+Demonstrate the behavior of the function.
+
+Example input:
+"This is [f-o] to demo [a-z] my [a-b] [b-b] program [b-d]"
+
+Expected output:
+"This is fghijklmno to demo abcdefghijklmnopqrstuvwxyz my ab b program bcd"
 
 
 
