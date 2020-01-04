@@ -1,0 +1,109 @@
+
+
+#include <stdio.h>
+#include <string.h>
+
+/**
+ * In this solution we use the pointers to indicate the current position of the
+ * input and output string. Note that the first parameter is const, so the
+ * function can be given a string literal too: convert("hello", output);
+ *
+ * It might be confusing that a const variable is changed (++input), but const
+ * here means that the pointed value can't change, but the pointer itself can.
+ *
+ * *output++ = *input;
+ * is the same as:
+ * *(output++) = *(input++);
+ * is the same as:
+ * *output = *input; ++output; ++input;
+ *
+ * Don't forget to put '\0' to the end of the output string, because that
+ * indicates the end of the string. If this character is missing then main()
+ * won't know where is the end of the output string.
+ *
+ * input[1]
+ * is the same as:
+ * *(input + 1)
+ * because both syntaxes can be used on pointers.
+ */
+void convert(const char* input, char* output)
+{
+  while (*input != '\0')
+    if (*input == '[')
+    {
+      for (char c = input[1]; c <= input[3]; ++c)
+        *output++ = c;
+      input += 5;
+    }
+    else
+      *output++ = *input++;
+
+  *output = '\0';
+}
+
+/**
+ * In this version we increment the value of "i" only by 4, since the "for"
+ * loop also has ++i for stepping to the next position.
+ */
+void convert1(const char* input, char* output)
+{
+  int j = 0;
+
+  for (int i = 0; input[i] != '\0'; ++i)
+    if (input[i] == '[')
+    {
+      for (char c = input[i + 1]; c <= input[i + 3]; ++c)
+        output[j++] = c;
+      i += 4;
+    }
+    else
+      output[j++] = input[i];
+
+  output[j] = '\0';
+}
+
+/**
+ * strchr() finds a character in a string and returns its position by a
+ * pointer. If the character is not inside the string then it returns NULL.
+ */
+void convert2(const char* input, char* output)
+{
+  const char* alphabet = "abcdefghijklmnopqrstuvwxyz";
+  int j = 0;
+
+  for (int i = 0; input[i] != '\0'; ++i)
+    if (input[i] == '[')
+    {
+      const char* pos1 = strchr(alphabet, input[i + 1]);
+      const char* pos2 = strchr(alphabet, input[i + 3]);
+
+      for (const char* pos = pos1; pos <= pos2; ++pos)
+        output[j++] = *pos;
+
+      i += 4;
+    }
+    else
+      output[j++] = input[i];
+
+  output[j] = '\0';
+}
+
+int main()
+{
+  char input[] = "This is [f-o] to demo [a-z] my [a-b] [b-b] program [b-d]";
+  char output[100];
+
+  convert(input, output);
+  printf("%s\n", output);
+
+  convert1(input, output);
+  printf("%s\n", output);
+
+  convert2(input, output);
+  printf("%s\n", output);
+
+  return 0;
+}
+
+
+
