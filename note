@@ -18,6 +18,21 @@ type arrayName [ arraySize ];
 （&）-> address 
 
 
+char word[] = "apple";
+printf("%lu\n",sizeof(woed)); /* 6 */
+
+
+char w1[]="lakoma";
+char w2[4]="alma";
+printf("%lu %s\n",sizeof(w1),w1);           7 lakoma
+printf("%lu %s\n",sizeof(w2),w2);           4 almalakoma
+
+C 库函数 char *strcpy(char *dest, const char *src) 把 src 所指向的字符串复制到 dest。
+char *strcpy(char *dest, const char *src)
+C 库函数 char *strcat(char *dest, const char *src) 把 src 所指向的字符串追加到 dest 所指向的字符串的结尾。
+char *strcat(char *dest, const char *src)
+        dest -- 指向目标数组，该数组包含了一个 C 字符串，且足够容纳追加后的字符串。
+        src -- 指向要追加的字符串，该字符串不会覆盖目标字符串。
 
 
 
